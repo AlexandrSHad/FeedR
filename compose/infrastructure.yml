@@ -1,5 +1,55 @@
 version: '3'
 
+name: feedr-infrastructure
+
+services:
+  redis:
+    image: redis
+    container_name: redis
+    restart: unless-stopped
+    networks:
+      - feedr
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+
+  pulsar:
+    image: apachepulsar/pulsar
+    container_name: pulsar
+    restart: unless-stopped
+    command: bin/pulsar standalone
+    networks:
+      - feedr
+    ports:
+      - 6650:6650
+      - 8080:8080
+    volumes:
+      - pulsardata:/pulsar/data
+      - pulsarconf:/pulsar/conf
+
+  # Pulsar manager is a Web UI for Pulsar, but I did not manage to get it to work
+  # due to a user/password/permissions issue
+  # pulsar-manager:
+  #   image: apachepulsar/pulsar-manager
+  #   container_name: pulsar-manager
+  #   restart: unless-stopped
+  #   networks:
+  #     - feedr
+  #   ports:
+  #     - 9527:9527
+  #     - 7750:7750
+  #   environment:
+  #     SPRING_CONFIGURATION_FILE: /pulsar-manager/pulsar-manager/application.properties
+
 networks:
   feedr:
     name: feedr
+
+volumes:
+  redis:
+    driver: local
+  pulsardata:
+    driver: local
+  pulsarconf:
+    driver: local

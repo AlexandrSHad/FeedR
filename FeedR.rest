@@ -1,9 +1,9 @@
-@gatewayUrl = http://localhost:5000
-@aggregatorUrl = http://localhost:5010
-@notifierUrl = http://localhost:5020
-@newsFeedUrl = http://localhost:5030
-@quotesFeedUrl = http://localhost:5040
-@weatherFeedUrl = http://localhost:5050
+@gatewayUrl = http://localhost:7000
+@aggregatorUrl = http://localhost:7010
+@notifierUrl = http://localhost:7020
+@newsFeedUrl = http://localhost:7030
+@quotesFeedUrl = http://localhost:7040
+@weatherFeedUrl = http://localhost:7050
 
 ###
 GET {{gatewayUrl}}
